@@ -1,6 +1,6 @@
 import type { Register } from 'claude-code'
 
-import { hasArabic, reorder, shape, visualLines } from './bidi.ts'
+import { hasArabic, lacksBidi, reorder, shape, visualLines } from './bidi.ts'
 
 const SPINNER: Record<string, string> = {
   requesting: 'يرسل',
@@ -20,7 +20,18 @@ const language = (thinking: string) => [
 ].join('\n')
 
 export const register: Register = (on, options) => {
-  const visual = options.rtl === 'visual'
+  let visual = options.rtl === 'visual'
+
+  on('session.start', async ($, e, next) => {
+    if (options.rtl === 'auto') {
+      visual = lacksBidi({
+        TERM_PROGRAM: await $.env.get('TERM_PROGRAM'),
+        TERM: await $.env.get('TERM'),
+        ALACRITTY_WINDOW_ID: await $.env.get('ALACRITTY_WINDOW_ID'),
+      })
+    }
+    return next(e)
+  })
 
   on('prompt.compose', async ($, e, next) => {
     const r = await next(e)

@@ -1,6 +1,6 @@
 import { expect, test } from 'claude-code/testing'
 
-import { reorder, shape, visualLines, wrap } from './bidi.ts'
+import { lacksBidi, reorder, shape, visualLines, wrap } from './bidi.ts'
 
 test('shapes letters into joined presentation forms', async () => {
   // س initial, لا final ligature, م isolated (alef does not join forward)
@@ -20,4 +20,12 @@ test('wraps to width and right-aligns RTL lines', async () => {
   const lines = visualLines('هذا سطر طويل جدا يجب أن يلتف', 10)
   expect(lines.length > 1).toBe(true)
   for (const l of lines) expect(Array.from(l).length).toBe(10)
+})
+
+test('auto mode picks visual only for terminals without BiDi', async () => {
+  expect(lacksBidi({ TERM_PROGRAM: 'vscode', TERM: 'xterm-256color' })).toBe(true)
+  expect(lacksBidi({ TERM: 'xterm-kitty' })).toBe(true)
+  expect(lacksBidi({ TERM: 'xterm-256color', ALACRITTY_WINDOW_ID: '1' })).toBe(true)
+  expect(lacksBidi({ TERM: 'xterm-256color' })).toBe(false) // Windows Terminal
+  expect(lacksBidi({ TERM_PROGRAM: 'tmux', TERM: 'tmux-256color' })).toBe(false)
 })

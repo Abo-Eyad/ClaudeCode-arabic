@@ -17,16 +17,17 @@ Answer `y` to add the marketplace, then pick the **user** scope.
 
 | Setting | Values | Meaning |
 | --- | --- | --- |
-| RTL mode | `native` (default) | Your terminal shows Arabic itself. Tested on Windows Terminal. |
+| RTL mode | `auto` (default) | Detects the terminal: `visual` for VS Code, kitty, Alacritty, Ghostty and WezTerm; `native` for everything else (tested on Windows Terminal). |
+| | `native` | Your terminal shows Arabic itself. |
 | | `visual` | Use only if Arabic shows reversed or with disconnected letters: the mod reorders and joins it itself. |
 | Thinking language | `arabic` (default) / `english` | English thinking is slightly cheaper; replies stay Arabic. |
 
 ## إعدادات الطرفية / Terminal setup
 
-- **Windows:** use Windows Terminal (not the old `cmd` console window). It works with the default `native` mode, nothing to change.
+- **Windows:** use Windows Terminal (not the old `cmd` console window). Nothing to change.
 - **Arabic reversed or letters disconnected?** Your terminal doesn't do right-to-left: `/config` → arabic → RTL mode → `visual`.
 - **Font:** one with Arabic glyphs, e.g. Cascadia Mono (2404+), DejaVu Sans Mono, Kawkab Mono, Vazir Code.
-- **WezTerm (optional, for `native`):** in `~/.wezterm.lua`:
+- **WezTerm (optional):** turn on its own RTL support in `~/.wezterm.lua`, then set RTL mode to `native`:
   ```lua
   config.bidi_enabled = true
   config.bidi_direction = 'AutoLeftToRight'

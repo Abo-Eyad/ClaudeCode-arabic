@@ -104,3 +104,11 @@ export function visualLines(line: string, width: number): string[] {
     return rtl ? v.padStart(width) : v
   })
 }
+
+// ponytail: only terminals known to draw Arabic unjoined/LTR; any other (Windows Terminal,
+// Konsole, GNOME Terminal, tmux, ...) is trusted to do BiDi itself. Add to this list as reports come in.
+// WezTerm is listed because its bidi_enabled is off by default.
+export const lacksBidi = (env: { TERM_PROGRAM?: string; TERM?: string; ALACRITTY_WINDOW_ID?: string }) =>
+  /^(vscode|wezterm|ghostty)$/i.test(env.TERM_PROGRAM ?? '') ||
+  /kitty|alacritty/.test(env.TERM ?? '') ||
+  env.ALACRITTY_WINDOW_ID !== undefined
