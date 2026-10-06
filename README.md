@@ -43,3 +43,7 @@ In `visual` mode only:
 Always:
 
 - Claude Code's own menus stay English; the spinner words are Arabic.
+
+## الرخصة / License
+
+MIT — see [LICENSE](LICENSE).

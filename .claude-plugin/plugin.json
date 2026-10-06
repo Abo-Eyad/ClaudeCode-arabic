@@ -1,6 +1,7 @@
 {
   "name": "arabic",
   "version": "0.2.0",
+  "license": "MIT",
   "description": "Claude Code in Arabic: replies and thinking in Arabic, with an optional right-to-left fix for terminals that show Arabic reversed",
   "userConfig": {
     "rtl": {
