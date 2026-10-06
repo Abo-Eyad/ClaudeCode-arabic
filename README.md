@@ -1,7 +1,7 @@
 # Claude Code بالعربي — Arabic for Claude Code
 
-يجعل Claude Code يرد ويفكر بالعربية، ويصلح اتجاه النص العربي (RTL) في الطرفيات التي لا تدعم الاتجاه الثنائي.
-Makes Claude Code reply and think in Arabic, and fixes right-to-left Arabic in terminals without BiDi support.
+يجعل Claude Code يرد ويفكر بالعربية، مع وضع اختياري لإصلاح اتجاه النص (RTL) في الطرفيات التي تعرض العربية مقلوبة.
+Makes Claude Code reply and think in Arabic, with an optional right-to-left fix for terminals that show Arabic reversed.
 
 ## التثبيت / Install
 
@@ -17,13 +17,14 @@ Answer `y` to add the marketplace, then pick the **user** scope.
 
 | Setting | Values | Meaning |
 | --- | --- | --- |
-| RTL mode | `visual` (default) | The mod reorders and joins Arabic letters itself. Use with Windows Terminal, VS Code terminal, macOS Terminal, iTerm2, Alacritty, kitty. |
-| | `native` | Your terminal does BiDi itself (WezTerm with `bidi_enabled`, Konsole, GNOME Terminal, mlterm). |
+| RTL mode | `native` (default) | Your terminal shows Arabic itself. Tested on Windows Terminal. |
+| | `visual` | Use only if Arabic shows reversed or with disconnected letters: the mod reorders and joins it itself. |
 | Thinking language | `arabic` (default) / `english` | English thinking is slightly cheaper; replies stay Arabic. |
 
 ## إعدادات الطرفية / Terminal setup
 
-- **Windows:** use Windows Terminal (not the old `cmd` console window). Keep RTL mode `visual`; Windows Terminal has no BiDi option.
+- **Windows:** use Windows Terminal (not the old `cmd` console window). It works with the default `native` mode, nothing to change.
+- **Arabic reversed or letters disconnected?** Your terminal doesn't do right-to-left: `/config` → arabic → RTL mode → `visual`.
 - **Font:** one with Arabic glyphs, e.g. Cascadia Mono (2404+), DejaVu Sans Mono, Kawkab Mono, Vazir Code.
 - **WezTerm (optional, for `native`):** in `~/.wezterm.lua`:
   ```lua
@@ -33,8 +34,12 @@ Answer `y` to add the marketplace, then pick the **user** scope.
 
 ## حدود معروفة / Known limits
 
-- The prompt box while you type is drawn by Claude Code and can't be hooked: Arabic looks wrong until you press Enter.
-- The thinking view (ctrl+o) is not hookable either: Claude thinks in Arabic, but it shows unfixed there.
-- Copying Arabic from the screen in `visual` mode copies the reordered text; the saved conversation is untouched.
+In `visual` mode only:
+
+- The prompt box while you type and the thinking view (ctrl+o) can't be hooked, so Arabic there stays as your terminal shows it.
+- Copying Arabic from the screen copies the reordered text; the saved conversation is untouched.
 - Arabic replies are drawn as plain lines: headings bold, code blocks kept, `**` and `` ` `` markers dropped. Tashkeel is dropped.
+
+Always:
+
 - Claude Code's own menus stay English; the spinner words are Arabic.
