@@ -45,7 +45,6 @@ In `visual` mode only:
 Always:
 
 - Menu translation runs once in the background with a small model (Haiku) and is cached; until it finishes, or for anything new, the menus show English. Setting values (`true`/`false`, option names) and command names stay English.
-- `/مساعدة` opens `/help`; other commands keep their English names.
 
 ## الرخصة / License
 

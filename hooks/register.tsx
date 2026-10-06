@@ -62,7 +62,6 @@ export const register: Register = (on, options) => {
     $.ui.invalidate('command.describe')
     $.ui.invalidate('config.describe')
     if (arabicMenus) $.clock.after(0, () => { void translateMenus($, tr) })
-    await $.command.register({ name: 'مساعدة', description: 'Shows help and the available commands (/help)' })
     if (options.rtl === 'auto') {
       visual = lacksBidi({
         TERM_PROGRAM: await $.env.get('TERM_PROGRAM'),
@@ -72,8 +71,6 @@ export const register: Register = (on, options) => {
     }
     return next(e)
   })
-
-  on('command.run', { command: 'مساعدة' }, ($, e) => $.command.run({ command: 'help', args: e.args }))
 
   on('command.describe', async ($, e, next) => {
     const r = await next(e)
