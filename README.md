@@ -1,7 +1,7 @@
 # Claude Code بالعربي — Arabic for Claude Code
 
-يجعل Claude Code يرد ويفكر بالعربية، مع وضع اختياري لإصلاح اتجاه النص (RTL) في الطرفيات التي تعرض العربية مقلوبة.
-Makes Claude Code reply and think in Arabic, with an optional right-to-left fix for terminals that show Arabic reversed.
+يجعل Claude Code يرد ويفكر بالعربية، ويعرّب قائمة `/config` ووصف الأوامر، مع إصلاح اتجاه النص (RTL) في الطرفيات التي تعرض العربية مقلوبة.
+Makes Claude Code reply and think in Arabic, translates the `/config` menu and command descriptions, and fixes right-to-left Arabic in terminals that show it reversed.
 
 ## التثبيت / Install
 
@@ -20,7 +20,8 @@ Answer `y` to add the marketplace, then pick the **user** scope.
 | RTL mode | `auto` (default) | Detects the terminal: `visual` for VS Code, kitty, Alacritty, Ghostty and WezTerm; `native` for everything else (tested on Windows Terminal). |
 | | `native` | Your terminal shows Arabic itself. |
 | | `visual` | Use only if Arabic shows reversed or with disconnected letters: the mod reorders and joins it itself. |
-| Thinking language | `arabic` (default) / `english` | English thinking is slightly cheaper; replies stay Arabic. |
+| Menu language | `arabic` (default) / `english` | Language of the `/config` menu and the slash-command descriptions. |
+| Thinking language | `arabic` (default) / `english` | Language Claude reasons in, and of the spinner words. English is slightly cheaper; replies stay Arabic either way. |
 
 ## إعدادات الطرفية / Terminal setup
 
@@ -43,7 +44,8 @@ In `visual` mode only:
 
 Always:
 
-- Claude Code's own menus stay English; the spinner words are Arabic.
+- Menu translation runs once in the background with a small model (Haiku) and is cached; until it finishes, or for anything new, the menus show English. Setting values (`true`/`false`, option names) and command names stay English.
+- `/مساعدة` opens `/help`; other commands keep their English names.
 
 ## الرخصة / License
 
