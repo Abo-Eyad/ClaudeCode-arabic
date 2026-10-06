@@ -1,0 +1,21 @@
+{
+  "name": "arabic",
+  "version": "0.1.0",
+  "description": "Claude Code in Arabic: replies and thinking in Arabic, right-to-left text fixed in terminals without BiDi support",
+  "userConfig": {
+    "rtl": {
+      "type": "string",
+      "title": "RTL mode",
+      "description": "visual: the mod reorders Arabic for terminals with no BiDi (Windows Terminal, VS Code, macOS Terminal, iTerm2). native: your terminal does BiDi itself (WezTerm with bidi_enabled, Konsole, GNOME Terminal, mlterm).",
+      "default": "visual",
+      "options": ["visual", "native"]
+    },
+    "thinking": {
+      "type": "string",
+      "title": "Thinking language",
+      "description": "Language Claude reasons in. English can be slightly sharper and cheaper; replies are Arabic either way.",
+      "default": "arabic",
+      "options": ["arabic", "english"]
+    }
+  }
+}
